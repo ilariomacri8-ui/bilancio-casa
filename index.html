@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bilancio Casa</title>
+
+  <meta name="theme-color" content="#1565c0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Bilancio Casa">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="app-header">
+        <h1>Bilancio Casa</h1>
+      
+        <div class="month-navigation">
+          <button
+            id="previousMonthButton"
+            class="month-button"
+            type="button"
+            aria-label="Mese precedente"
+          >
+            ←
+          </button>
+      
+          <p id="monthLabel">Caricamento...</p>
+      
+          <button
+            id="nextMonthButton"
+            class="month-button"
+            type="button"
+            aria-label="Mese successivo"
+          >
+            →
+          </button>
+        </div>
+      </header>
+
+  <main class="container">
+    <section class="summary-grid">
+      <article class="card income">
+        <span>Entrate del mese</span>
+        <strong id="incomeTotal">€ 0,00</strong>
+      </article>
+
+      <article class="card expense">
+        <span>Uscite del mese</span>
+        <strong id="expenseTotal">€ 0,00</strong>
+      </article>
+
+      <article class="card balance">
+        <span>Saldo del mese</span>
+        <strong id="balanceTotal">€ 0,00</strong>
+      </article>
+
+      <article class="card pending">
+        <span>Da pagare</span>
+        <strong id="pendingTotal">€ 0,00</strong>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Aggiungi un movimento</h2>
+
+      <form id="transactionForm">
+        <label for="type">
+          Tipo
+        </label>
+
+        <select id="type" required>
+          <option value="expense">Uscita</option>
+          <option value="income">Entrata</option>
+        </select>
+
+        <label for="amount">
+          Importo
+        </label>
+
+        <input
+          id="amount"
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="Esempio: 45,90"
+          required
+        >
+
+        <label for="category">
+          Categoria
+        </label>
+
+        <select id="category" required>
+          <option value="Alimentari">Alimentari</option>
+          <option value="Energia elettrica">Energia elettrica</option>
+          <option value="Gas">Gas</option>
+          <option value="Acqua">Acqua</option>
+          <option value="Condominio">Condominio</option>
+          <option value="Internet e telefono">Internet e telefono</option>
+          <option value="Rate e finanziamenti">Rate e finanziamenti</option>
+          <option value="Trasporti">Trasporti e carburante</option>
+          <option value="Auto">Auto e manutenzione</option>
+          <option value="Salute">Salute</option>
+          <option value="Scuola e figli">Scuola e figli</option>
+          <option value="Assicurazioni">Assicurazioni</option>
+          <option value="Tasse">Tasse e tributi</option>
+          <option value="Svago">Svago</option>
+          <option value="Stipendio">Stipendio</option>
+          <option value="Altre entrate">Altre entrate</option>
+          <option value="Altro">Altro</option>
+        </select>
+
+        <label for="date">
+          Data
+        </label>
+
+        <input id="date" type="date" required>
+
+        <label for="description">
+          Descrizione facoltativa
+        </label>
+
+        <input
+          id="description"
+          type="text"
+          maxlength="100"
+          placeholder="Esempio: Spesa supermercato"
+        >
+
+        <button type="submit">Salva movimento</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Ultimi movimenti</h2>
+      <div id="transactionList">
+        <p>Nessun movimento inserito.</p>
+      </div>
+    </section>
+    <section class="card">
+        <h2>Bollette, condominio e rate</h2>
+      
+        <form id="billForm">
+          <label for="billName">
+            Nome della scadenza
+          </label>
+      
+          <input
+            id="billName"
+            type="text"
+            maxlength="100"
+            placeholder="Esempio: Bolletta luce settembre"
+            required
+          >
+      
+          <label for="billCategory">
+            Tipo
+          </label>
+      
+          <select id="billCategory" required>
+            <option value="Energia elettrica">Energia elettrica</option>
+            <option value="Gas">Gas</option>
+            <option value="Acqua">Acqua</option>
+            <option value="Condominio">Condominio</option>
+            <option value="Internet e telefono">Internet e telefono</option>
+            <option value="Rata">Rata e finanziamento</option>
+            <option value="Assicurazione">Assicurazione</option>
+            <option value="Tasse e tributi">Tasse e tributi</option>
+            <option value="Altro">Altro</option>
+          </select>
+      
+          <label for="billAmount">
+            Importo da pagare
+          </label>
+      
+          <input
+            id="billAmount"
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Esempio: 89,50"
+            required
+          >
+      
+          <label for="billDueDate">
+            Data di scadenza
+          </label>
+      
+          <input id="billDueDate" type="date" required>
+      
+          <label for="billNotes">
+            Note facoltative
+          </label>
+      
+          <input
+            id="billNotes"
+            type="text"
+            maxlength="100"
+            placeholder="Esempio: Pagamento con addebito bancario"
+          >
+      
+          <button type="submit">Aggiungi scadenza</button>
+        </form>
+      </section>
+      
+      <section class="card">
+        <h2>Scadenze da pagare</h2>
+        <div id="billList">
+          <p class="empty-message">Nessuna scadenza inserita.</p>
+        </div>
+      </section>
+      <section class="card">
+        <h2>Scadenze già pagate</h2>
+        <div id="paidBillList">
+          <p class="empty-message">Nessuna scadenza pagata.</p>
+        </div>
+      </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
